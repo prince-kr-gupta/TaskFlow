@@ -1,7 +1,7 @@
 import { loadTasks, addTask, moveTask, deleteTask } from "./modules/taskManager.js";
 import { renderBoard } from "./modules/board.js";
 import { initTheme } from "./modules/theme.js";
-
+import { initDragDrop } from "./modules/dragDrop.js";
 
 const taskModal = document.getElementById("taskModal");
 const addTaskBtn = document.getElementById("addTaskBtn");
@@ -15,6 +15,7 @@ const dateInput = document.getElementById("taskDueDate");
 const kanbanBoard = document.querySelector(".kanban-board");
 
 initTheme();
+initDragDrop();
 const initialTasks = loadTasks();
 renderBoard(initialTasks);
 

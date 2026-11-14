@@ -5,6 +5,7 @@ function createTaskCard(task) {
     const card = document.createElement("div");
     card.className = "task-card";
     card.dataset.id = task.id;
+    card.draggable = true;
 
     const dateClass = (isOverdue(task.dueDate) && task.status !== "done") ? "task-date overdue" : "task-date";
     const dateText = task.dueDate ? formatDate(task.dueDate) : "No due date";
