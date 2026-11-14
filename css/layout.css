@@ -1,0 +1,207 @@
+.app-container {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+.sidebar {
+    width: 250px;
+    min-height: 100vh;
+    background-color: var(--sidebar-color);
+
+    display: flex;
+    flex-direction: column;
+
+    padding: var(--spacing-lg);
+    border-right: 1px solid var(--border-color);
+
+    flex-shrink: 0;
+}
+
+.sidebar-header {
+    margin-bottom: var(--spacing-2xl);
+}
+
+.logo {
+    font-size: var(--font-2xl);
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.nav-heading {
+    font-size: var(--font-xs);
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: var(--spacing-sm);
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+
+    padding: 12px 14px;
+    border-radius: var(--radius-md);
+    gap: var(--spacing-sm);
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding-top: var(--spacing-lg);
+}
+
+.main-content {
+    flex: 1;
+    min-width: 0;
+    padding: var(--spacing-xl);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: var(--spacing-2xl);
+    gap: var(--spacing-lg);
+}
+
+.header-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.user-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboard {
+    margin-bottom: var(--spacing-2xl);
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: var(--spacing-lg);
+    gap: var(--spacing-md);
+}
+
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--spacing-lg);
+}
+
+
+.kanban-section {
+    margin-bottom: var(--spacing-2xl);
+}
+
+.kanban-board {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--spacing-lg);
+
+    align-items: start;
+}
+
+.kanban-column {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.column-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: var(--spacing-md);
+}
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+
+    min-height: 150px;
+}
+
+.calendar-section {
+    margin-bottom: var(--spacing-2xl);
+}
+
+.calendar-container {
+    width: 100%;
+}
+
+.notes-section {
+    margin-bottom: var(--spacing-2xl);
+}
+
+.notes-container {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.analytics-section {
+    margin-bottom: var(--spacing-2xl);
+}
+
+.analytics-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: fixed;
+    inset: 0;
+
+    padding: var(--spacing-lg);
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 500px;
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: var(--spacing-lg);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+
+    margin-bottom: var(--spacing-md);
+}
