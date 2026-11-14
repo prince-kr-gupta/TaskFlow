@@ -262,3 +262,40 @@ button {
     text-align: center;
     padding: var(--spacing-xl);
 }
+.hidden {
+    display: none !important;
+}
+
+.task-date.overdue {
+    color: var(--danger-color);
+    font-weight: 600;
+}
+
+.task-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.move-btn,
+.delete-btn {
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    font-size: var(--font-xs);
+    font-weight: 600;
+}
+
+.move-btn {
+    background-color: var(--background-color);
+    color: var(--text-primary);
+}
+
+.move-btn:hover {
+    background-color: var(--border-color);
+}
+
+.delete-btn {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
