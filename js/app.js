@@ -1,5 +1,7 @@
 import { loadTasks, addTask, moveTask, deleteTask } from "./modules/taskManager.js";
 import { renderBoard } from "./modules/board.js";
+import { initTheme } from "./modules/theme.js";
+
 
 const taskModal = document.getElementById("taskModal");
 const addTaskBtn = document.getElementById("addTaskBtn");
@@ -14,6 +16,7 @@ const kanbanBoard = document.querySelector(".kanban-board");
 
 const initialTasks = loadTasks();
 renderBoard(initialTasks);
+initTheme();
 
 addTaskBtn.addEventListener("click", function () {
     taskModal.classList.remove("hidden");
