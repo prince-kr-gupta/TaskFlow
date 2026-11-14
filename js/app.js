@@ -14,9 +14,10 @@ const priorityInput = document.getElementById("taskPriority");
 const dateInput = document.getElementById("taskDueDate");
 const kanbanBoard = document.querySelector(".kanban-board");
 
+initTheme();
 const initialTasks = loadTasks();
 renderBoard(initialTasks);
-initTheme();
+
 
 addTaskBtn.addEventListener("click", function () {
     taskModal.classList.remove("hidden");
