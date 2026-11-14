@@ -1,0 +1,124 @@
+@media (max-width: 1024px) {
+
+    .sidebar {
+        width: 210px;
+        padding: var(--spacing-md);
+    }
+
+    .main-content {
+        padding: var(--spacing-lg);
+    }
+
+    .dashboard-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .kanban-board {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .notes-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+/* 2. TABLETS AND LARGE PHONES */
+
+@media (max-width: 768px) {
+
+    .app-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+        padding: var(--spacing-md);
+    }
+
+    .sidebar-header {
+        margin-bottom: var(--spacing-md);
+    }
+
+    .sidebar-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .sidebar-footer {
+        display: none;
+    }
+
+    .main-content {
+        width: 100%;
+        padding: var(--spacing-md);
+    }
+
+    .header {
+        align-items: flex-start;
+    }
+
+    .header-right {
+        gap: var(--spacing-sm);
+    }
+
+    .kanban-board {
+        grid-template-columns: 1fr;
+    }
+
+    .notes-container,
+    .analytics-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* 3. MOBILE PHONES */
+
+@media (max-width: 480px) {
+
+    .main-content {
+        padding: var(--spacing-sm);
+    }
+
+    .header {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    .header-right {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .header h1 {
+        font-size: var(--font-xl);
+    }
+
+    .dashboard-cards {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-sm);
+    }
+
+    .summary-card {
+        padding: var(--spacing-md);
+    }
+
+    .summary-card p {
+        font-size: var(--font-xl);
+    }
+
+    .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .modal {
+        padding: var(--spacing-sm);
+    }
+
+    .modal-content {
+        padding: var(--spacing-lg);
+    }
+}
