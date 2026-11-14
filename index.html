@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TaskFlow - Manage your tasks and improve your productivity.">
     <title>TaskFlow</title>
 
     <link rel="stylesheet" href="css/main.css">
@@ -26,7 +27,7 @@
             <nav class="sidebar-nav">
                 <p class="nav-heading">MENU</p>
 
-                <a href="#dashboard" class="nav-link-active">
+                <a href="#dashboard" class="nav-link active">
                     Dashboard
                 </a>
 
@@ -57,8 +58,245 @@
         <!-- Main content -->
          <main class="main-content">
 
-            
+            <!-- Header -->
+            <header class="header">
+
+                <div class="header-left">
+                    <p class="welcome-text">Welcome back!</p>
+                    <h2>Dashboard</h2>
+                </div>
+
+                <div class="header-right">
+
+                    <button class="theme-toggle" id="themeToggle" type="button">
+                        Toggle Theme
+                    </button>
+
+                    <div class ="user-profile">
+                        <span class="user-avatar">U</span>
+                        <span class="user-name">User</span>
+                    </div>
+
+                </div>
+
+            </header>
+
+            <!-- Dashboard -->
+             <section class="dashboard" id="dashboard">
+                <div class="section-heading">
+                    <div>
+                        <h2>Overview</h2>
+                        <p>Here's what's happening with your tasks.</p>
+                    </div>
+
+                    <button class="add-task-btn" id="addTaskBtn" type="button">
+                        + Add New Task
+                    </button>
+                </div>
+
+                <!-- Summary cards -->
+                 <div class="dashboard-cards">
+
+                    <article class="summary-card">
+                        <h3>Total Tasks</h3>
+                        <p class="card-number" id="totalTasks">0</p>
+                    </article>
+
+                    <article class="summary-card">
+                        <h3>To Do</h3>
+                        <p class="card-number" id="todoTasks">0</p>
+                    </article>
+
+                    <article class="summary-card">
+                        <h3>In Progress</h3>
+                        <p class="card-number" id="progressTasks">0</p>
+                    </article>
+
+                    <article class="summary-card">
+                        <h3>Completed</h3>
+                        <p class="card-number" id="completedTasks">0</p>
+                    </article>
+
+                </div>
+             </section>
+
+             <!-- Kanban Board -->
+              <section class="kanban-section" id="tasks">
+
+                 <div class="section-heading">
+                    <div>
+                        <h2>My Tasks</h2>
+                        <p>Manage and track your daily work.</p>
+                    </div>
+                </div>
+
+                <div class="kanban-board">
+
+                    <!-- To Do Column -->
+                      <div class="kanban-column" data-status="todo">
+
+                        <div class="column-header">
+                            <h3>To Do</h3>
+                            <span class="task-count" id="todoCount">0</span>
+                        </div>
+
+                        <div class="task-list" id="todoList">
+                            <!-- Tasks will be rendered here -->
+                        </div>
+                    </div>
+
+                    <!-- In Progress Column -->
+
+                    <div class="kanban-column" data-status="in-progress">
+
+                        <div class="column-header">
+                            <h3>In Progress</h3>
+                            <span class="task-count" id="progressCount">0</span>
+                        </div>
+
+                        <div class="task-list" id="progressList">
+                            <!-- Tasks will be rendered here -->
+                        </div>
+
+                    </div>
+
+                    <!-- Done Column -->
+
+                     <div class="kanban-column" data-status="done">
+
+                        <div class="column-header">
+                            <h3>Done</h3>
+                            <span class="task-count" id="doneCount">0</span>
+                        </div>
+
+                        <div class="task-list" id="doneList">
+                            <!-- Tasks will be rendered here -->
+                        </div>
+
+                    </div>
+
+                </div>
+
+              </section>
+
+              <!-- Calendar Section -->
+
+               <section class="calendar-section" id="calendar">
+
+                <div class="section-heading">
+                    <h2>Calendar</h2>
+                </div>
+
+                <div class="calendar-container">
+                    <!-- Calendar will be generated using JavaScript -->
+                </div>
+
+            </section>
+
+            <!-- Notes Section -->
+
+            <section class="notes-section" id="notes">
+
+                <div class="section-heading">
+                    <h2>My Notes</h2>
+                </div>
+
+                <div class="notes-container">
+                    <!-- Notes will be rendered here -->
+                </div>
+
+            </section>
+
+            <!-- Analytics Section -->
+              <section class="analytics-section" id="analytics">
+
+                <div class="section-heading">
+                    <h2>Productivity Analytics</h2>
+                </div>
+
+                <div class="analytics-container">
+                    <!-- Analytics will be displayed here -->
+                </div>
+
+            </section>
+
          </main>
     </div>
+    <!-- End of app-container -->
+
+    <!-- Add modal Task -->
+
+    <div class="modal" id="taskModal" aria-hidden="true">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h2>Add New Task</h2>
+
+                <button
+                    type="button"
+                    class="close-modal"
+                    id="closeTaskModal"
+                    aria-label="Close task form">
+                    &times;
+                </button>
+            </div>
+
+            <form id="taskForm">
+
+                <div class="form-group">
+                    <label for="taskTitle">Task Title</label>
+                    <input
+                        type="text"
+                        id="taskTitle"
+                        name="taskTitle"
+                        placeholder="Enter task title"
+                        required>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="taskDescription">Description</label>
+                    <textarea
+                        id="taskDescription"
+                        name="taskDescription"
+                        placeholder="Enter task description"
+                        rows="4">
+                    </textarea>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="taskPriority">Priority</label>
+
+                    <select id="taskPriority" name="taskPriority">
+                        <option value="low">Low</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="taskDueDate">Due Date</label>
+
+                    <input
+                        type="date"
+                        id="taskDueDate"
+                        name="taskDueDate">
+                </div>
+
+
+                <button type="submit" class="submit-task-btn">
+                    Create Task
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script type="module" src="js/app.js"></script>
 </body>
 </html>
