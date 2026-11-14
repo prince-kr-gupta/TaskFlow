@@ -41,7 +41,7 @@ export function getDaysRemaining(dueDate) {
 }
 
 //Capitalize first toLocaleDateString
-export function CapitalizeFirstLetter(text) {
+export function capitalizeFirstLetter(text) {
     if(!text) return "";
 
     return text[0].toUpperCase() + text.slice(1);
