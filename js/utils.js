@@ -1,7 +1,7 @@
 // Generate unique id
 
 export function generateId(){
-    return crypto.randomUUID;
+    return crypto.randomUUID();
 }
 
 // Format Date

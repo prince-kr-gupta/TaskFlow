@@ -226,7 +226,7 @@
 
     <!-- Add modal Task -->
 
-    <div class="modal" id="taskModal" aria-hidden="true">
+    <div class="modal hidden" id="taskModal" aria-hidden="true">
 
         <div class="modal-content">
 
@@ -254,21 +254,17 @@
                         required>
                 </div>
 
-
                 <div class="form-group">
                     <label for="taskDescription">Description</label>
                     <textarea
                         id="taskDescription"
                         name="taskDescription"
                         placeholder="Enter task description"
-                        rows="4">
-                    </textarea>
+                        rows="4"></textarea>
                 </div>
-
 
                 <div class="form-group">
                     <label for="taskPriority">Priority</label>
-
                     <select id="taskPriority" name="taskPriority">
                         <option value="low">Low</option>
                         <option value="medium" selected>Medium</option>
@@ -276,18 +272,15 @@
                     </select>
                 </div>
 
-
                 <div class="form-group">
                     <label for="taskDueDate">Due Date</label>
-
                     <input
                         type="date"
                         id="taskDueDate"
                         name="taskDueDate">
                 </div>
 
-
-                <button type="submit" class="submit-task-btn">
+                <button type="submit" class="primary-btn">
                     Create Task
                 </button>
 

@@ -1,46 +1,69 @@
 // Kanban board
-import { formatDate,isOverdue } from "../utils";
+import { formatDate, isOverdue, capitalizeFirstLetter } from "../utils.js";
 
 function createTaskCard(task) {
     const card = document.createElement("div");
     card.className = "task-card";
     card.dataset.id = task.id;
 
-    const dateClass = (isOverdue(task.dueDate) && task.status !== "done") ? "overdue" : "";
+    const dateClass = (isOverdue(task.dueDate) && task.status !== "done") ? "task-date overdue" : "task-date";
     const dateText = task.dueDate ? formatDate(task.dueDate) : "No due date";
+    const priorityLabel = capitalizeFirstLetter(task.priority || "medium");
+
+    let buttonsHTML = "";
+    buttonsHTML += task.status !== "todo" ? `<button class="move-btn" data-status="todo">To Do</button>` : "";
+    buttonsHTML += task.status !== "in-progress" ? `<button class="move-btn" data-status="in-progress">In Progress</button>` : "";
+    buttonsHTML += task.status !== "done" ? `<button class="move-btn" data-status="done">Done</button>` : "";
+    buttonsHTML += `<button class="delete-btn">Delete</button>`;
 
     card.innerHTML = `
-    <h4>${task.title}</h4>
-    <p class="${dateClass}">${dateText}</p>
-    <div class="task-actions">
-    ${buttonsHTML}
-    </div>
+        <span class="task-priority priority-${task.priority || "medium"}">${priorityLabel}</span>
+        <h4>${task.title}</h4>
+        ${task.description ? `<p>${task.description}</p>` : ""}
+        <p class="${dateClass}">${dateText}</p>
+        <div class="task-actions">
+            ${buttonsHTML}
+        </div>
     `;
-return card;
 
+    return card;
 }
 
 export function renderBoard(tasks) {
-    const todoList = document.querySelector("#todo-list");
-    const inprogressList = document.querySelector("#inprogress-list");
-    const doneList = document.querySelector("#done-list");
+    const todoList = document.getElementById("todoList");
+    const progressList = document.getElementById("progressList");
+    const doneList = document.getElementById("doneList");
 
     todoList.innerHTML = "";
-    inprogressList.innerHTML= "";
+    progressList.innerHTML = "";
     doneList.innerHTML = "";
 
-    for(const task of tasks) {
-        const card  = createTaskCard(task);
+    let todoCount = 0;
+    let progressCount = 0;
+    let doneCount = 0;
 
-        if(task.status === "todo") {
+    for (const task of tasks) {
+        const card = createTaskCard(task);
+
+        if (task.status === "todo") {
             todoList.appendChild(card);
-
-        }
-        else if(task.status === "inprogress") {
-            inprogressList.appendChild(card);
-        }
-        else if(task.status === "done") {
+            todoCount++;
+        } else if (task.status === "in-progress") {
+            progressList.appendChild(card);
+            progressCount++;
+        } else if (task.status === "done") {
             doneList.appendChild(card);
+            doneCount++;
         }
     }
+
+    // Update column and dashboard numbers
+    document.getElementById("todoCount").textContent = todoCount;
+    document.getElementById("progressCount").textContent = progressCount;
+    document.getElementById("doneCount").textContent = doneCount;
+
+    document.getElementById("totalTasks").textContent = tasks.length;
+    document.getElementById("todoTasks").textContent = todoCount;
+    document.getElementById("progressTasks").textContent = progressCount;
+    document.getElementById("completedTasks").textContent = doneCount;
 }
