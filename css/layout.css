@@ -1,3 +1,4 @@
+/* layout.css - contains sidebar,header,dashboard,side-page  */
 .app-container {
     display: flex;
     min-height: 100vh;
