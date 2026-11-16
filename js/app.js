@@ -2,6 +2,7 @@ import { loadTasks, addTask, moveTask, deleteTask } from "./modules/taskManager.
 import { renderBoard } from "./modules/board.js";
 import { initTheme } from "./modules/theme.js";
 import { initDragDrop } from "./modules/dragDrop.js";
+import { renderCalendar } from "./modules/calendar.js";
 
 const taskModal = document.getElementById("taskModal");
 const addTaskBtn = document.getElementById("addTaskBtn");
