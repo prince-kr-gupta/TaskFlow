@@ -15,6 +15,7 @@ const priorityInput = document.getElementById("taskPriority");
 const dateInput = document.getElementById("taskDueDate");
 const kanbanBoard = document.querySelector(".kanban-board");
 
+renderCalendar();
 initTheme();
 initDragDrop();
 const initialTasks = loadTasks();
