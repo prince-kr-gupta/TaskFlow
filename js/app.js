@@ -3,6 +3,7 @@ import { renderBoard } from "./modules/board.js";
 import { initTheme } from "./modules/theme.js";
 import { initDragDrop } from "./modules/dragDrop.js";
 import { renderCalendar } from "./modules/calendar.js";
+import { initNotes } from "./modules/notes.js";
 
 const taskModal = document.getElementById("taskModal");
 const addTaskBtn = document.getElementById("addTaskBtn");
@@ -15,6 +16,7 @@ const priorityInput = document.getElementById("taskPriority");
 const dateInput = document.getElementById("taskDueDate");
 const kanbanBoard = document.querySelector(".kanban-board");
 
+initNotes();
 renderCalendar();
 initTheme();
 initDragDrop();
@@ -76,4 +78,5 @@ kanbanBoard.addEventListener("click", function (event) {
         const updatedTasks = deleteTask(taskId);
         renderBoard(updatedTasks);
     }
+
 });
