@@ -303,3 +303,87 @@ button {
     outline: 2px dashed var(--primary-color);
     outline-offset: -2px;
 }
+.analytics-container .empty-state {
+    grid-column: 1 / -1;
+}
+
+.analytics-card {
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.analytics-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.analytics-card-header h3 {
+    font-size: var(--font-md);
+    color: var(--text-primary);
+}
+
+.analytics-stat {
+    font-size: var(--font-xl);
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.progress-track {
+    width: 100%;
+    height: 10px;
+    background-color: var(--border-color);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--primary-color);
+    border-radius: 999px;
+    transition: width 0.3s ease;
+}
+
+.progress-fill.high {
+    background-color: var(--priority-high);
+}
+
+.progress-fill.medium {
+    background-color: var(--priority-medium);
+}
+
+.progress-fill.low {
+    background-color: var(--priority-low);
+}
+
+.analytics-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    font-size: var(--font-sm);
+    color: var(--text-secondary);
+}
+
+.analytics-meta .overdue-text {
+    color: var(--danger-color);
+}
+
+.priority-bars {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.priority-row-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--font-xs);
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+}
