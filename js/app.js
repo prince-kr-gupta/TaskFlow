@@ -4,6 +4,7 @@ import { initTheme } from "./modules/theme.js";
 import { initDragDrop } from "./modules/dragDrop.js";
 import { renderCalendar } from "./modules/calendar.js";
 import { initNotes } from "./modules/notes.js";
+import { renderAnalytics } from "./modules/analytics.js";
 
 const taskModal = document.getElementById("taskModal");
 const addTaskBtn = document.getElementById("addTaskBtn");
@@ -18,6 +19,7 @@ const kanbanBoard = document.querySelector(".kanban-board");
 
 initNotes();
 renderCalendar();
+renderAnalytics();
 initTheme();
 initDragDrop();
 const initialTasks = loadTasks();
