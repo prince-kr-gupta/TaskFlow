@@ -146,4 +146,5 @@ export function initFilters(onFilterChange) {
                 <option value="default">Sort: Default</option>
                 <option value="priority-desc">Priority (High → Low)</option>
                 <option value="priority-asc">Priority (Low → High)</option>
-                <option value="due-asc">
+                <option value="due-asc"></option>
+                </select>

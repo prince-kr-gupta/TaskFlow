@@ -5,6 +5,7 @@ import { initDragDrop } from "./modules/dragDrop.js";
 import { renderCalendar } from "./modules/calendar.js";
 import { initNotes } from "./modules/notes.js";
 import { renderAnalytics } from "./modules/analytics.js";
+import { initFilters } from "./modules/filters.js";
 
 const taskModal = document.getElementById("taskModal");
 const addTaskBtn = document.getElementById("addTaskBtn");
@@ -17,6 +18,7 @@ const priorityInput = document.getElementById("taskPriority");
 const dateInput = document.getElementById("taskDueDate");
 const kanbanBoard = document.querySelector(".kanban-board");
 
+initFilters();
 initNotes();
 renderCalendar();
 renderAnalytics();
