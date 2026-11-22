@@ -146,5 +146,56 @@ export function initFilters(onFilterChange) {
                 <option value="default">Sort: Default</option>
                 <option value="priority-desc">Priority (High → Low)</option>
                 <option value="priority-asc">Priority (Low → High)</option>
-                <option value="due-asc"></option>
-                </select>
+                <option value="due-asc">Due Date (Earliest)</option>
+                <option value="due-desc">Due Date (Latest)</option>
+            </select>
+
+            <button type="button" id="resetFiltersBtn" class="secondary-btn">
+                Reset
+            </button>
+        `;
+
+        kanbanSection.insertBefore(filterBar, kanbanBoard);
+    }
+
+    const searchInput = document.getElementById('filterSearch');
+    const prioritySelect = document.getElementById('filterPriority');
+    const dueDateSelect = document.getElementById('filterDueDate');
+    const sortSelect = document.getElementById('sortTasks');
+    const resetBtn = document.getElementById('resetFiltersBtn');
+
+    const getFilterState = () => ({
+        search: searchInput?.value || '',
+        priority: prioritySelect?.value || 'all',
+        dueDate: dueDateSelect?.value || 'all',
+        sortBy: sortSelect?.value || 'default'
+    });
+
+    const triggerChange = () => {
+        if (typeof onFilterChange === 'function') {
+            onFilterChange(getFilterState());
+        }
+    };
+
+    const resetFilters = () => {
+        if (searchInput) searchInput.value = '';
+        if (prioritySelect) prioritySelect.value = 'all';
+        if (dueDateSelect) dueDateSelect.value = 'all';
+        if (sortSelect) sortSelect.value = 'default';
+        triggerChange();
+    };
+
+    // Debounce search input for smooth typing
+    let debounceTimer;
+    searchInput?.addEventListener('input', () => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(triggerChange, 150);
+    });
+
+    prioritySelect?.addEventListener('change', triggerChange);
+    dueDateSelect?.addEventListener('change', triggerChange);
+    sortSelect?.addEventListener('change', triggerChange);
+    resetBtn?.addEventListener('click', resetFilters);
+
+    return { getFilterState, resetFilters };
+}
