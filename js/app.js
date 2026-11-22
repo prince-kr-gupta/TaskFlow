@@ -5,7 +5,7 @@ import { initDragDrop } from "./modules/dragDrop.js";
 import { renderCalendar } from "./modules/calendar.js";
 import { initNotes } from "./modules/notes.js";
 import { renderAnalytics } from "./modules/analytics.js";
-import { initFilters } from "./modules/filters.js";
+import { filterTasks,sortTasks,initFilters } from "./modules/filters.js";
 
 const taskModal = document.getElementById("taskModal");
 const addTaskBtn = document.getElementById("addTaskBtn");
@@ -18,7 +18,7 @@ const priorityInput = document.getElementById("taskPriority");
 const dateInput = document.getElementById("taskDueDate");
 const kanbanBoard = document.querySelector(".kanban-board");
 
-initFilters();
+
 initNotes();
 renderCalendar();
 renderAnalytics();
@@ -27,6 +27,17 @@ initDragDrop();
 const initialTasks = loadTasks();
 renderBoard(initialTasks);
 
+let tasks = []; // Your main tasks state array
+
+const { getFilterState } = initFilters(() => {
+    renderBoard();
+});
+
+function renderBoard() {
+    const currentFilters = getFilterState();
+    const filtered = filterTasks(tasks, currentFilters);
+    const visibleTasks = sortTasks(filtered, currentFilters.sortBy);
+}
 
 addTaskBtn.addEventListener("click", function () {
     taskModal.classList.remove("hidden");
