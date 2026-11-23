@@ -5,7 +5,7 @@ import { initDragDrop } from "./modules/dragDrop.js";
 import { renderCalendar } from "./modules/calendar.js";
 import { initNotes } from "./modules/notes.js";
 import { renderAnalytics } from "./modules/analytics.js";
-import { filterTasks,sortTasks,initFilters } from "./modules/filters.js";
+import { filterTasks, sortTasks, initFilters } from "./modules/filters.js";
 
 const taskModal = document.getElementById("taskModal");
 const addTaskBtn = document.getElementById("addTaskBtn");
@@ -18,26 +18,28 @@ const priorityInput = document.getElementById("taskPriority");
 const dateInput = document.getElementById("taskDueDate");
 const kanbanBoard = document.querySelector(".kanban-board");
 
-
-initNotes();
-renderCalendar();
-renderAnalytics();
-initTheme();
-initDragDrop();
-const initialTasks = loadTasks();
-renderBoard(initialTasks);
-
-let tasks = []; // Your main tasks state array
+let tasks = loadTasks();
 
 const { getFilterState } = initFilters(() => {
-    renderBoard();
+    updateBoard();
 });
 
-function renderBoard() {
+function updateBoard(latestTasks = loadTasks()) {
+    tasks = latestTasks;
+
     const currentFilters = getFilterState();
     const filtered = filterTasks(tasks, currentFilters);
     const visibleTasks = sortTasks(filtered, currentFilters.sortBy);
+
+    renderBoard(visibleTasks);
+    renderCalendar();
+    renderAnalytics();
 }
+
+initNotes();
+initTheme();
+initDragDrop();
+updateBoard(tasks);
 
 addTaskBtn.addEventListener("click", function () {
     taskModal.classList.remove("hidden");
@@ -53,7 +55,6 @@ taskModal.addEventListener("click", function (event) {
     }
 });
 
-
 taskForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
@@ -67,7 +68,7 @@ taskForm.addEventListener("submit", function (event) {
     }
 
     const updatedTasks = addTask(title, description, priority, dueDate);
-    renderBoard(updatedTasks);
+    updateBoard(updatedTasks);
 
     taskForm.reset();
     taskModal.classList.add("hidden");
@@ -86,12 +87,11 @@ kanbanBoard.addEventListener("click", function (event) {
     if (clickedElement.classList.contains("move-btn")) {
         const newStatus = clickedElement.dataset.status;
         const updatedTasks = moveTask(taskId, newStatus);
-        renderBoard(updatedTasks);
+        updateBoard(updatedTasks);
     }
 
     if (clickedElement.classList.contains("delete-btn")) {
         const updatedTasks = deleteTask(taskId);
-        renderBoard(updatedTasks);
+        updateBoard(updatedTasks);
     }
-
 });
