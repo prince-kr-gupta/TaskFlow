@@ -1,36 +1,4 @@
-// Kanban board
-import { formatDate, isOverdue, capitalizeFirstLetter } from "../utils.js";
-
-function createTaskCard(task) {
-    const card = document.createElement("div");
-    card.className = "task-card";
-    card.dataset.id = task.id;
-    card.draggable = true;
-
-    const dateClass = (isOverdue(task.dueDate) && task.status !== "done") ? "task-date overdue" : "task-date";
-    const dateText = task.dueDate ? formatDate(task.dueDate) : "No due date";
-    const priorityLabel = capitalizeFirstLetter(task.priority || "medium");
-
-    let buttonsHTML = "";
-    buttonsHTML += task.status !== "todo" ? `<button class="move-btn" data-status="todo">To Do</button>` : "";
-    buttonsHTML += task.status !== "in-progress" ? `<button class="move-btn" data-status="in-progress">In Progress</button>` : "";
-    buttonsHTML += task.status !== "done" ? `<button class="move-btn" data-status="done">Done</button>` : "";
-    buttonsHTML += `<button class="delete-btn">Delete</button>`;
-
-    card.innerHTML = `
-        <span class="task-priority priority-${task.priority || "medium"}">${priorityLabel}</span>
-        <h4>${task.title}</h4>
-        ${task.description ? `<p>${task.description}</p>` : ""}
-        <p class="${dateClass}">${dateText}</p>
-        <div class="task-actions">
-            ${buttonsHTML}
-        </div>
-    `;
-
-    return card;
-}
-
-export function renderBoard(tasks) {
+export function renderBoard(tasks, allTasks = tasks) {
     const todoList = document.getElementById("todoList");
     const progressList = document.getElementById("progressList");
     const doneList = document.getElementById("doneList");
@@ -58,13 +26,14 @@ export function renderBoard(tasks) {
         }
     }
 
-    // Update column and dashboard numbers
+    // Column headers show visible/filtered counts
     document.getElementById("todoCount").textContent = todoCount;
     document.getElementById("progressCount").textContent = progressCount;
     document.getElementById("doneCount").textContent = doneCount;
 
-    document.getElementById("totalTasks").textContent = tasks.length;
-    document.getElementById("todoTasks").textContent = todoCount;
-    document.getElementById("progressTasks").textContent = progressCount;
-    document.getElementById("completedTasks").textContent = doneCount;
+    // Overview cards always show total workspace stats
+    document.getElementById("totalTasks").textContent = allTasks.length;
+    document.getElementById("todoTasks").textContent = allTasks.filter(t => t.status === "todo").length;
+    document.getElementById("progressTasks").textContent = allTasks.filter(t => t.status === "in-progress").length;
+    document.getElementById("completedTasks").textContent = allTasks.filter(t => t.status === "done").length;
 }
