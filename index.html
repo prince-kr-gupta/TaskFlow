@@ -194,18 +194,35 @@
             </section>
 
             <!-- Notes Section -->
+             
+<section class="notes-section" id="notes">
 
-            <section class="notes-section" id="notes">
+    <div class="section-heading">
+        <div>
+            <h2>My Notes</h2>
+            <p>Jot down quick reminders and study notes.</p>
+        </div>
+    </div>
 
-                <div class="section-heading">
-                    <h2>My Notes</h2>
-                </div>
+    <form id="noteForm" class="note-form">
+        <input
+            type="text"
+            id="noteTitle"
+            placeholder="Note title..."
+            required>
+        <textarea
+            id="noteContent"
+            placeholder="Write your note here..."
+            rows="2"
+            required></textarea>
+        <button type="submit" class="primary-btn">+ Add Note</button>
+    </form>
 
-                <div class="notes-container">
-                    <!-- Notes will be rendered here -->
-                </div>
+    <div class="notes-container" id="notesContainer">
+        <!-- Notes will be rendered here -->
+    </div>
 
-            </section>
+</section>
 
             <!-- Analytics Section -->
               <section class="analytics-section" id="analytics">
