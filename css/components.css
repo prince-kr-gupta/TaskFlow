@@ -338,3 +338,337 @@
     margin-top: 0.5rem;
     width: 100%;
 }
+/* Task Card Badges, Dates & Action Buttons */
+.task-card {
+    cursor: grab;
+}
+
+.task-card.dragging {
+    opacity: 0.5;
+}
+
+.kanban-column.drag-over {
+    border: 2px dashed var(--accent-primary);
+    background-color: var(--accent-soft);
+}
+
+.task-priority {
+    align-self: flex-start;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+}
+
+.task-date {
+    font-size: 0.78rem !important;
+    color: var(--text-muted) !important;
+    font-weight: 500;
+}
+
+.task-date.overdue,
+.overdue-text {
+    color: var(--priority-high-text) !important;
+    font-weight: 700;
+}
+
+.task-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 0.5rem;
+    padding-top: 0.65rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.move-btn,
+.delete-btn {
+    font-size: 0.76rem;
+    font-weight: 600;
+    padding: 0.32rem 0.65rem;
+    border-radius: var(--radius-sm);
+    transition: background-color var(--transition), color var(--transition);
+}
+
+.move-btn {
+    background-color: var(--accent-soft);
+    color: var(--accent-primary);
+}
+
+.move-btn:hover {
+    background-color: var(--accent-primary);
+    color: #ffffff;
+}
+
+.delete-btn {
+    background-color: var(--priority-high-bg);
+    color: var(--priority-high-text);
+    margin-left: auto;
+}
+
+.delete-btn:hover {
+    background-color: #dc2626;
+    color: #ffffff;
+}
+
+/* Calendar Grid & Pills */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.calendar-header h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.calendar-nav {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 0.5rem;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.45rem;
+}
+
+.calendar-day {
+    min-height: 92px;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 0.45rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.calendar-day.empty {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.calendar-day.today {
+    border: 2px solid var(--accent-primary);
+    background-color: var(--accent-soft);
+}
+
+.calendar-day-number {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+}
+
+.calendar-tasks {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    overflow: hidden;
+}
+
+.calendar-task-pill {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.calendar-task-pill.done {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+/* Notes Form & Cards */
+.note-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    margin-bottom: 1.25rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.note-form input,
+.note-form textarea {
+    padding: 0.65rem 0.85rem;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+}
+
+.note-form input:focus,
+.note-form textarea:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+}
+
+.note-form .primary-btn {
+    align-self: flex-start;
+}
+
+.notes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+    align-items: start;
+}
+
+.note-card {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.note-card h4 {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.note-card p {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    white-space: pre-wrap;
+}
+
+.note-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.note-date {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.empty-state {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    text-align: center;
+    padding: 1.5rem;
+    grid-column: 1 / -1;
+}
+
+/* Analytics Cards & Progress Bars */
+.analytics-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.25rem;
+}
+
+.analytics-card {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.analytics-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.analytics-card-header h3 {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.analytics-stat {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--accent-primary);
+}
+
+.progress-track {
+    width: 100%;
+    height: 10px;
+    background-color: var(--bg-tertiary);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--accent-primary);
+    border-radius: 999px;
+    transition: width 0.3s ease;
+}
+
+.progress-fill.high {
+    background-color: #ef4444;
+}
+
+.progress-fill.medium {
+    background-color: #f59e0b;
+}
+
+.progress-fill.low {
+    background-color: #22c55e;
+}
+
+.analytics-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+}
+
+.priority-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.priority-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.priority-row-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
