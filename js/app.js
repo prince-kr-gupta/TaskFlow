@@ -21,7 +21,7 @@ const kanbanBoard = document.querySelector(".kanban-board");
 let tasks = loadTasks();
 
 const { getFilterState } = initFilters(() => {
-    updateBoard();
+    updateBoard(tasks);
 });
 
 function updateBoard(latestTasks = loadTasks()) {
@@ -31,27 +31,38 @@ function updateBoard(latestTasks = loadTasks()) {
     const filtered = filterTasks(tasks, currentFilters);
     const visibleTasks = sortTasks(filtered, currentFilters.sortBy);
 
-    renderBoard(visibleTasks);
-    renderCalendar();
-    renderAnalytics();
+    renderBoard(visibleTasks, tasks);
+    renderCalendar(tasks);
+    renderAnalytics(tasks);
 }
 
 initNotes();
 initTheme();
-initDragDrop();
+initDragDrop(updateBoard);
 updateBoard(tasks);
 
 addTaskBtn.addEventListener("click", function () {
     taskModal.classList.remove("hidden");
+    taskModal.setAttribute("aria-hidden", "false");
+    titleInput.focus();
 });
 
-closeTaskModal.addEventListener("click", function () {
+function closeModal() {
     taskModal.classList.add("hidden");
-});
+    taskModal.setAttribute("aria-hidden", "true");
+}
+
+closeTaskModal.addEventListener("click", closeModal);
 
 taskModal.addEventListener("click", function (event) {
     if (event.target === taskModal) {
-        taskModal.classList.add("hidden");
+        closeModal();
+    }
+});
+
+document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && !taskModal.classList.contains("hidden")) {
+        closeModal();
     }
 });
 
@@ -71,7 +82,7 @@ taskForm.addEventListener("submit", function (event) {
     updateBoard(updatedTasks);
 
     taskForm.reset();
-    taskModal.classList.add("hidden");
+    closeModal();
 });
 
 kanbanBoard.addEventListener("click", function (event) {
