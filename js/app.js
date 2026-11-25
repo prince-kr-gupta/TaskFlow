@@ -37,6 +37,7 @@ function updateBoard(latestTasks = loadTasks()) {
 }
 
 initNotes();
+initNote();
 initTheme();
 initDragDrop(updateBoard);
 updateBoard(tasks);
