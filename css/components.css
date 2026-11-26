@@ -672,3 +672,16 @@
     font-weight: 600;
     color: var(--text-secondary);
 }
+.edit-btn {
+    font-size: 0.76rem;
+    font-weight: 600;
+    padding: 0.32rem 0.65rem;
+    border-radius: var(--radius-sm);
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    transition: background-color var(--transition);
+}
+
+.edit-btn:hover {
+    background-color: var(--border-color);
+}
