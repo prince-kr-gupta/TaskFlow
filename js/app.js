@@ -1,4 +1,4 @@
-import { loadTasks, addTask, moveTask, deleteTask } from "./modules/taskManager.js";
+import { loadTasks, addTask, editTask, moveTask, deleteTask } from "./modules/taskManager.js";
 import { renderBoard } from "./modules/board.js";
 import { initTheme } from "./modules/theme.js";
 import { initDragDrop } from "./modules/dragDrop.js";
@@ -8,17 +8,23 @@ import { renderAnalytics } from "./modules/analytics.js";
 import { filterTasks, sortTasks, initFilters } from "./modules/filters.js";
 
 const taskModal = document.getElementById("taskModal");
+const modalTitle = taskModal.querySelector(".modal-header h2");
 const addTaskBtn = document.getElementById("addTaskBtn");
 const closeTaskModal = document.getElementById("closeTaskModal");
 
 const taskForm = document.getElementById("taskForm");
+const modalSubmitBtn = taskForm.querySelector('button[type="submit"]');
 const titleInput = document.getElementById("taskTitle");
 const descriptionInput = document.getElementById("taskDescription");
 const priorityInput = document.getElementById("taskPriority");
 const dateInput = document.getElementById("taskDueDate");
+
 const kanbanBoard = document.querySelector(".kanban-board");
+const navLinks = document.querySelectorAll(".nav-link");
+const headerTitle = document.querySelector(".header-left h2");
 
 let tasks = loadTasks();
+let editingTaskId = null;
 
 const { getFilterState } = initFilters(() => {
     updateBoard(tasks);
@@ -36,22 +42,42 @@ function updateBoard(latestTasks = loadTasks()) {
     renderAnalytics(tasks);
 }
 
+function openModal(taskToEdit = null) {
+    if (taskToEdit) {
+        editingTaskId = taskToEdit.id;
+        modalTitle.textContent = "Edit Task";
+        modalSubmitBtn.textContent = "Save Changes";
+        titleInput.value = taskToEdit.title;
+        descriptionInput.value = taskToEdit.description || "";
+        priorityInput.value = taskToEdit.priority || "medium";
+        dateInput.value = taskToEdit.dueDate || "";
+    } else {
+        editingTaskId = null;
+        modalTitle.textContent = "Add New Task";
+        modalSubmitBtn.textContent = "Create Task";
+        taskForm.reset();
+    }
+
+    taskModal.classList.remove("hidden");
+    taskModal.setAttribute("aria-hidden", "false");
+    titleInput.focus();
+}
+
+function closeModal() {
+    editingTaskId = null;
+    taskForm.reset();
+    taskModal.classList.add("hidden");
+    taskModal.setAttribute("aria-hidden", "true");
+}
+
+// Initialize modules
 initNotes();
 initTheme();
 initDragDrop(updateBoard);
 updateBoard(tasks);
 
-addTaskBtn.addEventListener("click", function () {
-    taskModal.classList.remove("hidden");
-    taskModal.setAttribute("aria-hidden", "false");
-    titleInput.focus();
-});
-
-function closeModal() {
-    taskModal.classList.add("hidden");
-    taskModal.setAttribute("aria-hidden", "true");
-}
-
+// Modal events
+addTaskBtn.addEventListener("click", () => openModal());
 closeTaskModal.addEventListener("click", closeModal);
 
 taskModal.addEventListener("click", function (event) {
@@ -66,6 +92,7 @@ document.addEventListener("keydown", function (event) {
     }
 });
 
+// Create or Edit task submit
 taskForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
@@ -78,13 +105,15 @@ taskForm.addEventListener("submit", function (event) {
         return;
     }
 
-    const updatedTasks = addTask(title, description, priority, dueDate);
-    updateBoard(updatedTasks);
+    const updatedTasks = editingTaskId
+        ? editTask(editingTaskId, { title, description, priority, dueDate })
+        : addTask(title, description, priority, dueDate);
 
-    taskForm.reset();
+    updateBoard(updatedTasks);
     closeModal();
 });
 
+// Kanban card actions (Move, Edit, Delete)
 kanbanBoard.addEventListener("click", function (event) {
     const clickedElement = event.target;
     const card = clickedElement.closest(".task-card");
@@ -101,8 +130,26 @@ kanbanBoard.addEventListener("click", function (event) {
         updateBoard(updatedTasks);
     }
 
+    if (clickedElement.classList.contains("edit-btn")) {
+        const taskToEdit = tasks.find(t => t.id === taskId);
+        if (taskToEdit) {
+            openModal(taskToEdit);
+        }
+    }
+
     if (clickedElement.classList.contains("delete-btn")) {
         const updatedTasks = deleteTask(taskId);
         updateBoard(updatedTasks);
     }
+});
+
+// Active sidebar navigation & header sync
+navLinks.forEach(link => {
+    link.addEventListener("click", () => {
+        navLinks.forEach(item => item.classList.remove("active"));
+        link.classList.add("active");
+        if (headerTitle) {
+            headerTitle.textContent = link.textContent.trim();
+        }
+    });
 });
