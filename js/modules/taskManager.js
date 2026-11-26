@@ -44,3 +44,21 @@ export function deleteTask(taskId) {
     saveTasks(remainingTasks);
     return remainingTasks;
 }
+
+export function editTask(taskId, updates) {
+    const tasks = getTasks();
+    const index = tasks.findIndex(task => task.id === taskId);
+
+    if (index !== -1) {
+        tasks[index] = {
+            ...tasks[index],
+            title: updates.title.trim(),
+            description: updates.description.trim(),
+            priority: updates.priority,
+            dueDate: updates.dueDate
+        };
+        saveTasks(tasks);
+    }
+
+    return tasks;
+}
