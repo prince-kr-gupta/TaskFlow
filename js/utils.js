@@ -1,48 +1,53 @@
-// Generate unique id
-
-export function generateId(){
+export function generateId() {
     return crypto.randomUUID();
 }
 
-// Format Date
+function parseLocalDate(dateString) {
+    if (!dateString) return null;
+    const [year, month, day] = dateString.split("-").map(Number);
+    return new Date(year, month - 1, day);
+}
 
 export function formatDate(dateString) {
+    const date = parseLocalDate(dateString);
+    if (!date) return "";
 
-    if(!dateString){
-        return "";
-    }
-
-    return new Date(dateString).toLocaleDateString("en-IN", {
+    return date.toLocaleDateString("en-IN", {
         day: "numeric",
         month: "short",
         year: "numeric"
     });
 }
 
-// Task is Overdue
-
 export function isOverdue(dueDate) {
-    if(!dueDate){
-        return false;
-    }
-    const today = new Date().setHours(0,0,0,0);
-    const deadline = new Date(dueDate);
+    const deadline = parseLocalDate(dueDate);
+    if (!deadline) return false;
 
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
     return deadline < today;
 }
 
-//Remaining Days
-
 export function getDaysRemaining(dueDate) {
-    if(!dueDate) return null;
+    const deadline = parseLocalDate(dueDate);
+    if (!deadline) return null;
 
-    const diff = new Date(dueDate) - new Date();
-    return Math.ceil(diff / (1000 * 60 * 60 * 24));
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
 }
 
-//Capitalize first toLocaleDateString
 export function capitalizeFirstLetter(text) {
-    if(!text) return "";
-
+    if (!text) return "";
     return text[0].toUpperCase() + text.slice(1);
+}
+
+export function escapeHTML(text) {
+    if (!text) return "";
+    return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
 }
