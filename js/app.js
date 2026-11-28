@@ -1,4 +1,4 @@
-import { loadTasks, addTask, editTask, moveTask, deleteTask } from "./modules/taskManager.js";
+import { loadTasks, addTask, editTask, moveTask, deleteTask, restoreTask} from "./modules/taskManager.js";
 import { renderBoard } from "./modules/board.js";
 import { initTheme } from "./modules/theme.js";
 import { initDragDrop } from "./modules/dragDrop.js";
@@ -153,3 +153,37 @@ navLinks.forEach(link => {
         }
     });
 });
+
+// 1. Click any calendar day to open modal pre-filled with that due date
+const calendarContainer = document.querySelector(".calendar-container");
+calendarContainer?.addEventListener("click", (event) => {
+    const dayCell = event.target.closest(".calendar-day[data-date]");
+    if (!dayCell) return;
+
+    openModal();
+    dateInput.value = dayCell.dataset.date;
+});
+
+// 2. Undo Toast helper (call showUndoToast(deletedTask) right after deleteTask)
+let toastTimer;
+function showUndoToast(deletedTask) {
+    document.getElementById("undoToast")?.remove();
+    clearTimeout(toastTimer);
+
+    const toast = document.createElement("div");
+    toast.id = "undoToast";
+    toast.className = "undo-toast";
+    toast.innerHTML = `
+        <span>Deleted "<strong>${deletedTask.title}</strong>"</span>
+        <button type="button" id="undoDeleteBtn" class="primary-btn">Undo</button>
+    `;
+    document.body.appendChild(toast);
+
+    document.getElementById("undoDeleteBtn").addEventListener("click", () => {
+        const restored = restoreTask(deletedTask);
+        updateBoard(restored);
+        toast.remove();
+    });
+
+    toastTimer = setTimeout(() => toast.remove(), 4500);
+}
