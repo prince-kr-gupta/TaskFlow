@@ -62,3 +62,9 @@ export function editTask(taskId, updates) {
 
     return tasks;
 }
+export function restoreTask(task) {
+    const tasks = getTasks();
+    tasks.push(task);
+    saveTasks(tasks);
+    return tasks;
+}
