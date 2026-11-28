@@ -685,3 +685,47 @@
 .edit-btn:hover {
     background-color: var(--border-color);
 }
+/* Column Status Top Accents */
+.kanban-column[data-status="todo"] {
+    border-top: 3px solid #64748b;
+}
+
+.kanban-column[data-status="in-progress"] {
+    border-top: 3px solid #f59e0b;
+}
+
+.kanban-column[data-status="done"] {
+    border-top: 3px solid #22c55e;
+}
+
+/* Clickable Calendar Day */
+.calendar-day[data-date] {
+    cursor: pointer;
+    transition: border-color var(--transition), background-color var(--transition);
+}
+
+.calendar-day[data-date]:hover {
+    border-color: var(--accent-primary);
+}
+
+/* Undo Delete Toast */
+.undo-toast {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-lg);
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    z-index: 1100;
+    font-size: 0.9rem;
+}
+
+.undo-toast .primary-btn {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.82rem;
+}
